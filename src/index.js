@@ -11,7 +11,7 @@ app.use(teamRoutes)
 app.use(playerRoutes)
 
 app.get('/', (req, res) => {
-  res.send('Initial endpoint')
+  res.send('World Cup API')
 })
 
 export default app

@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Player {
+  id   String @id @default(cuid())
+  name String
+
+  // imagens
+  photo  String // foto do jogador
+  banner String // banner do jogador
+
+  // Dados físicos
+  heightCm     Int?
+  weightKg     Int?
+  dominantFoot String?
+
+  // Estatísticas principais
+  pace      Int?
+  shooting  Int?
+  passing   Int?
+  dribbling Int?
+  defense   Int?
+  physical  Int?
+
+  // Estatísticas detalhadas
+  acceleration       Int?
+  sprintSpeed        Int?
+  positioning        Int?
+  finishing          Int?
+  shotPower          Int?
+  longShots          Int?
+  volleys            Int?
+  penalties          Int?
+  vision             Int?
+  crossing           Int?
+  freeKickAccuracy   Int?
+  shortPassing       Int?
+  longPassing        Int?
+  curve              Int?
+  agility            Int?
+  balance            Int?
+  reactions          Int?
+  ballControl        Int?
+  composure          Int?
+  interceptions      Int?
+  headingAccuracy    Int?
+  defensiveAwareness Int?
+  standingTackle     Int?
+  slidingTackle      Int?
+  jumping            Int?
+  stamina            Int?
+  strength           Int?
+  aggression         Int?
+
+  // Classificação FIFA
+  overallRating  Int?
+  positionRating String? // ATA, MEI, etc.
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //Relações
+  teamId String
+  team   Team   @relation(fields: [teamId], references: [id])
+}
+
+model Country {
+  id   String @id @default(cuid())
+  name String
+
+  stadiums Stadium[]
+}
+
+model Group {
+  id     String @id @default(cuid())
+  name   String // "Grupo A", "Grupo B"
+  letter String @unique // "A", "B", "C"...
+
+  createdAt DateTime @default(now())
+}
+
+model Team {
+  id String @id @default(cuid())
+
+  name      String // "Brasil"
+  continent String
+
+  // destaque na home
+  isFeatured Boolean @default(false)
+
+  // imagens
+  thumbnail String // imagem do card
+  banner    String // banner da página dinâmica
+  flag      String // bandeira
+
+  // ranking
+  fifaRanking Int?
+  fifaPoints  Float?
+  titlesRank  Int?
+
+  // histórico em copas
+  worldCupAppearances Int?
+  worldCupFinals      Int?
+  worldCupTitles      Int?
+
+  // desempenho nas eliminatórias
+  matches Int?
+  wins    Int?
+  draws   Int?
+  losses  Int?
+
+  players Player[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Stadium {
+  id          String @id @default(cuid())
+  name        String
+  description String
+
+  // informações
+  locate     String
+  capacity   Int
+  openedYear Int
+
+  // imagens
+  coverImage String
+
+  // relações
+  countryId String
+  country   Country @relation(fields: [countryId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GalleryImage {
+  id    String @id @default(cuid())
+  image String
+
+  createdAt DateTime @default(now())
+}
