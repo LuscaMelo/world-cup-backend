@@ -1,6 +1,8 @@
+import { Request, Response } from "express";
+
 const teamController = {
 
-    getTeams(req, res) {
+    getTeams(req: Request, res: Response) {
         res.send("Teams")
     }
 }

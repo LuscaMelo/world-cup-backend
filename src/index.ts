@@ -1,7 +1,7 @@
 import express from 'express'
-import groupRoutes from './routes/groupRoutes.js'
-import teamRoutes from './routes/teamRoutes.js'
-import playerRoutes from './routes/playerRoutes.js'
+import groupRoutes from './routes/groupRoutes'
+import teamRoutes from './routes/teamRoutes'
+import playerRoutes from './routes/playerRoutes'
 
 const app = express()
 

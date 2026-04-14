@@ -1,6 +1,8 @@
+import { Request, Response } from "express";
+
 const groupController = {
 
-    getGroups(req, res) {
+    getGroups(req: Request, res: Response) {
         res.send("Groups")
     }
 }

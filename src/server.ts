@@ -1,4 +1,4 @@
-import app from './index.js'
+import app from './index'
 
 const port = 3002
 
