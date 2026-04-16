@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -47,6 +46,7 @@ model Player {
   balance            Int?
   reactions          Int?
   ballControl        Int?
+  driving            Int?
   composure          Int?
   interceptions      Int?
   headingAccuracy    Int?
@@ -79,8 +79,12 @@ model Country {
 
 model Group {
   id     String @id @default(cuid())
-  name   String // "Grupo A", "Grupo B"
-  letter String @unique // "A", "B", "C"...
+  name   String
+  letter String @unique
+
+  isFeatured Boolean @default(false)
+
+  teams Json
 
   createdAt DateTime @default(now())
 }

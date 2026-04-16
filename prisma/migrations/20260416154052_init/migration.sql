@@ -31,6 +31,7 @@ CREATE TABLE "Player" (
     "balance" INTEGER,
     "reactions" INTEGER,
     "ballControl" INTEGER,
+    "driving" INTEGER,
     "composure" INTEGER,
     "interceptions" INTEGER,
     "headingAccuracy" INTEGER,
@@ -63,6 +64,8 @@ CREATE TABLE "Group" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "letter" TEXT NOT NULL,
+    "isFeatured" BOOLEAN NOT NULL DEFAULT false,
+    "teams" JSONB NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Group_pkey" PRIMARY KEY ("id")
