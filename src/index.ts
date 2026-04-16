@@ -5,6 +5,7 @@ import playerRoutes from './routes/playerRoutes'
 import countryRoutes from './routes/countryRoutes'
 import stadiumRoutes from './routes/stadiumRoutes'
 import galleryRoutes from './routes/galleryRoutes'
+import searchRoutes from './routes/searchRoutes';
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(playerRoutes)
 app.use(countryRoutes)
 app.use(stadiumRoutes)
 app.use(galleryRoutes)
+app.use(searchRoutes)
 
 app.get('/', (req, res) => {
   res.send('World Cup API')
