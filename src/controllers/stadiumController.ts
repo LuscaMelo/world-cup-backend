@@ -3,13 +3,18 @@ import { prisma } from "../../lib/prisma";
 
 const stadiumController = {
 
+    // Todos os estádios
     async getStadiums(req: Request, res: Response) {
         try {
-            const stadiums = await prisma.stadium.findMany()
-            res.json(stadiums)
+            const stadiums = await prisma.stadium.findMany();
+
+            return res.json(stadiums);
         } catch (error) {
-            console.error(error)
-            res.status(500).json({ error: "Erro ao buscar estádios" })
+            console.error("Erro ao buscar os estádios:", error);
+
+            return res.status(500).json({
+                error: "Erro interno ao buscar os estádios"
+            });
         }
     }
 }
