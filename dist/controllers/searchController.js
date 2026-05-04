@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.globalSearch = void 0;
-const prisma_1 = require("../../lib/prisma");
+const prisma_1 = require("../lib/prisma");
 const globalSearch = async (req, res) => {
     const { q } = req.query;
     // validação básica
