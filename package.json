@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx src/seed.ts"
   },
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",
