@@ -18,6 +18,31 @@ const playerController = {
         }
     },
 
+    // Jogadores em destaque
+    async getFeaturedPlayers(req: Request, res: Response) {
+        try {
+            const players = await prisma.player.findMany({
+                where: {
+                    overallRating: {
+                        gt: 89
+                    }
+                },
+                orderBy: {
+                    overallRating: 'desc'
+                },
+                take: 4
+            });
+
+            return res.json(players);
+        } catch (error) {
+            console.error("Erro ao buscar jogadores em destaque:", error);
+
+            return res.status(500).json({
+                error: "Erro interno ao buscar jogadores em destaque"
+            });
+        }
+    },
+
     // Jogador por ID
     async getPlayerById(req: Request, res: Response) {
         try {
