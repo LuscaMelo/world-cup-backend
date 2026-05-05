@@ -6,19 +6,29 @@ const playerController = {
     // Todos os jogadores
     async getPlayers(req: Request, res: Response) {
         try {
-            const players = await prisma.player.findMany();
+            const players = await prisma.player.findMany({
+                include: {
+                    team: {
+                        select: {
+                            name: true,
+                            flag: true
+                        }
+                    }
+                }
+            });
 
             return res.json(players);
         } catch (error) {
             console.error("Erro ao buscar os jogadores:", error);
 
             return res.status(500).json({
-                error: "Erro interno ao buscar os jogadores"
+                error: "Erro interno ao buscar os jogadores",
+                details: error instanceof Error ? error.message : error
             });
         }
     },
 
-    // Jogadores em destaque
+    // Jogadores em destaque (overall > 89, top 4)
     async getFeaturedPlayers(req: Request, res: Response) {
         try {
             const players = await prisma.player.findMany({
@@ -30,7 +40,15 @@ const playerController = {
                 orderBy: {
                     overallRating: 'desc'
                 },
-                take: 4
+                take: 4,
+                include: {
+                    team: {
+                        select: {
+                            name: true,
+                            flag: true
+                        }
+                    }
+                }
             });
 
             return res.json(players);
@@ -52,6 +70,14 @@ const playerController = {
             const player = await prisma.player.findUnique({
                 where: {
                     id: String(id)
+                },
+                include: {
+                    team: {
+                        select: {
+                            name: true,
+                            flag: true
+                        }
+                    }
                 }
             });
 
@@ -67,10 +93,11 @@ const playerController = {
             console.error("Erro ao buscar jogador:", error);
 
             return res.status(500).json({
-                error: "Erro interno ao buscar jogador"
+                error: "Erro interno ao buscar jogador",
+                details: error instanceof Error ? error.message : error
             });
         }
     }
-}
+};
 
-export default playerController
+export default playerController;
