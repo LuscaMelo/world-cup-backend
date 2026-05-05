@@ -24,7 +24,6 @@ const playerController = {
             const players = await prisma.player.findMany({
                 where: {
                     overallRating: {
-                        not: null,
                         gt: 89
                     }
                 },
