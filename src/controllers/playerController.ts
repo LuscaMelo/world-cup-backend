@@ -24,6 +24,7 @@ const playerController = {
             const players = await prisma.player.findMany({
                 where: {
                     overallRating: {
+                        not: null,
                         gt: 89
                     }
                 },
@@ -38,7 +39,8 @@ const playerController = {
             console.error("Erro ao buscar jogadores em destaque:", error);
 
             return res.status(500).json({
-                error: "Erro interno ao buscar jogadores em destaque"
+                error: "Erro interno ao buscar jogadores em destaque",
+                details: error instanceof Error ? error.message : error
             });
         }
     },
