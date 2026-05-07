@@ -6,9 +6,14 @@ const stadiumController = {
     // Todos os estádios
     async getStadiums(req: Request, res: Response) {
         try {
-            const stadiums = await prisma.stadium.findMany();
+            const stadiums = await prisma.stadium.findMany({
+                include: {
+                    country: true,
+                },
+            });
 
             return res.json(stadiums);
+
         } catch (error) {
             console.error("Erro ao buscar os estádios:", error);
 
@@ -19,4 +24,4 @@ const stadiumController = {
     }
 }
 
-export default stadiumController
+export default stadiumController;
