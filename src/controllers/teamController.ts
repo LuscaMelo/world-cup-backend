@@ -6,9 +6,14 @@ const teamController = {
     // Todas as seleções
     async getTeams(req: Request, res: Response) {
         try {
-            const stadiums = await prisma.team.findMany();
+            const teams = await prisma.team.findMany({
+                include: {
+                    players: true
+                }
+            });
 
-            return res.json(stadiums);
+            return res.json(teams);
+
         } catch (error) {
             console.error("Erro ao buscar as seleções:", error);
 
