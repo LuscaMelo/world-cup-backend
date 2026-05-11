@@ -5,6 +5,6 @@ const router = Router()
 
 router.get('/players', playerController.getPlayers)
 router.get("/players/featured", playerController.getFeaturedPlayers)
-router.get("/players/:id", playerController.getPlayerById);
+router.get("/players/slug/:slug", playerController.getPlayerBySlug);
 
 export default router

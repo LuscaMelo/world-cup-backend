@@ -62,15 +62,12 @@ const playerController = {
         }
     },
 
-    // Jogador por ID
-    async getPlayerById(req: Request, res: Response) {
+    // Jogador por slug
+    async getPlayerBySlug(req: Request, res: Response) {
         try {
-            const { id } = req.params;
+            const { slug } = req.params;
 
-            const player = await prisma.player.findUnique({
-                where: {
-                    id: String(id)
-                },
+            const players = await prisma.player.findMany({
                 include: {
                     team: {
                         select: {
@@ -79,6 +76,17 @@ const playerController = {
                         }
                     }
                 }
+            });
+
+            const player = players.find((player) => {
+
+                const playerSlug = player.name
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/\s+/g, "-");
+
+                return playerSlug === slug;
             });
 
             if (!player) {
@@ -94,7 +102,9 @@ const playerController = {
 
             return res.status(500).json({
                 error: "Erro interno ao buscar jogador",
-                details: error instanceof Error ? error.message : error
+                details: error instanceof Error
+                    ? error.message
+                    : error
             });
         }
     }
