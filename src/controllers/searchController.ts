@@ -36,7 +36,7 @@ export const globalSearch = async (req: Request, res: Response) => {
           id: true,
           name: true,
           photo: true,
-          team: true
+          team: true,
         },
         orderBy: {
           name: "asc",
@@ -52,6 +52,7 @@ export const globalSearch = async (req: Request, res: Response) => {
           id: true,
           name: true,
           flag: true,
+          continent: true,
         },
         orderBy: {
           name: "asc",
