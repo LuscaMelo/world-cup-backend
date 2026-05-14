@@ -50,7 +50,7 @@ export const globalSearch = async (req: Request, res: Response) => {
         select: {
           id: true,
           name: true,
-          thumbnail: true,
+          flag: true,
         },
         orderBy: {
           name: "asc",
