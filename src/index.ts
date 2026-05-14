@@ -6,8 +6,11 @@ import countryRoutes from './routes/countryRoutes'
 import stadiumRoutes from './routes/stadiumRoutes'
 import galleryRoutes from './routes/galleryRoutes'
 import searchRoutes from './routes/searchRoutes';
+import cors from "cors"
 
 const app = express()
+
+app.use(cors())
 
 app.use(express.json())
 app.use(groupRoutes)
